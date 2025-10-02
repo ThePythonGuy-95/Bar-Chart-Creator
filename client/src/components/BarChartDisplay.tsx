@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import {
   Bar,
   BarChart,
@@ -19,7 +20,8 @@ interface BarChartDisplayProps {
   title: string;
 }
 
-export function BarChartDisplay({ data, title }: BarChartDisplayProps) {
+export const BarChartDisplay = forwardRef<HTMLDivElement, BarChartDisplayProps>(
+  ({ data, title }, ref) => {
   const hasData = data.length > 0 && data.some((d) => d.label && d.value > 0);
 
   if (!hasData) {
@@ -51,7 +53,7 @@ export function BarChartDisplay({ data, title }: BarChartDisplayProps) {
   const chartData = data.filter((d) => d.label && d.value > 0);
 
   return (
-    <Card className="h-full">
+    <Card className="h-full" ref={ref}>
       <CardContent className="pt-6">
         {title && (
           <h3 className="text-xl font-semibold mb-6 text-center" data-testid="text-chart-title">
@@ -88,4 +90,6 @@ export function BarChartDisplay({ data, title }: BarChartDisplayProps) {
       </CardContent>
     </Card>
   );
-}
+});
+
+BarChartDisplay.displayName = "BarChartDisplay";
