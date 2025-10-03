@@ -56,7 +56,7 @@ app.use((req, res, next) => {
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    const distPath = path.join(__dirname, "../client/dist");
+    const distPath = path.join(__dirname, "public");
     app.use(express.static(distPath));
     app.get("*", (_req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
