@@ -44,11 +44,6 @@ app.use((req, res, next) => {
 (async () => {
   const server = await registerRoutes(app);
 
-  // ✅ Root route for Render health check
-  app.get('/', (_req: Request, res: Response) => {
-    res.send('Bar Chart Creator backend is running!');
-  });
-
   // ✅ Error handler
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
